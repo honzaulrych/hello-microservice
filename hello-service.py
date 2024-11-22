@@ -1,10 +1,12 @@
 from flask import Flask
 
 app = Flask(__name__)
+import socket
 
 @app.route("/hello/<name>")
 def hello(name):
-    message = f"Hello, {name}! How are you?"
+    hostname = socket.gethostname()
+    message = f"Hello, {name}! My name is {hostname}."
     response = f'{{\n\t"message": "{message}"\n}}\n'
     code = 200
     return response, code, {'Content-Type': 'application/json'}
